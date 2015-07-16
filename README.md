@@ -1,0 +1,37 @@
+End to end testing of Servoy solutions example running on saucelabs.
+
+Prerequisites 
+'Jenkins' https://jenkins-ci.org/
+	- git plugin https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin
+	- ant plugin https://wiki.jenkins-ci.org/display/JENKINS/Ant+Plugin
+	- Sauce OnDemand plugin https://wiki.jenkins-ci.org/display/JENKINS/Sauce+OnDemand+Plugin
+'npm' command available in path - a nodejs install https://nodejs.org/ will bring npm with it
+'ant' command available in path
+'ant-contrib' simply copy ant-contrib*.jar to the $ANT_HOME/lib/ folder - http://ant-contrib.sourceforge.net/#install
+'Servoy 8' full install, will be used to export solutions to war files
+
+The entry point is e2e_test_runner.xml. It takes a servoy solution project (the 'hello' folder), exports it as a war file ('e2e/war_export/hello.war'), starts a tomcat server instance (the 'apache-tomcat-8.0.24' folder),  deploys the war, runs the protractor test scripts e2e/spec/hello/*_spec.js, undeploys the war file and shuts down tomcat.
+
+For each tested solution (in this example there is only one) the folder e2e/spec/ has to contain a folder with the same name as the tested solution. So for each tested solution, the script looks in e2e/spec for a folder with the same name as the solution and runs all the files ending in '_spec.js'.
+
+To add another solution, check out the project (and it's resources project) in the jenkins workpace near the 'hello' project and add its name in test_runner.properties in the variable 'solutions_to_export_as_war_tests'. Eg:
+solutions_to_export_as_war_tests			= hello\
+mySolution
+Tests should then be added in the folder e2e/spec/mySolution/ and should end with '_spec.js'.
+
+Protractor test scripts can be generated using Selenium IDE http://www.seleniumhq.org/projects/ide/. 
+
+Setup
+1. Create a Freestyle jenkins job.
+2. Add this git repository URL:... Branch Specifier:*/master
+3. Enable Sauce labs support and Sauce Connect. Override default authentication with your Sauce labs account credentials. 
+4. Add an 'Invoke Ant' build step. And fill in as follows
+	Targets: 	run_war_solution_tests
+	Build File: e2e_test_runner.xml
+	Properties: jdk1.8_home = /usr/lib/jvm/java-8-oracle
+				servoy_install = /usr/local/servoy
+				sauceUserPlaceholder=sauceLabsUserName
+				sauceKeyPlaceholder=sauceLabsAceessKey
+Note: The values for the and properties are provided as an example, they should be customised to match your instalation and Sauce Labs account.
+5. Add a 'Publish JUnit test result report' post build action and fill in 'Test report XMLs' with e2e/testResults/*.xml
+6. Optionally add a 'Run Sauce Labs Test Publisher' post build action.
