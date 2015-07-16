@@ -49,7 +49,7 @@ Setup
 ```
 Note: The values for the and properties are provided as an example, they should be customised to match your instalation and Sauce Labs account.
 
-5. Add a 'Publish JUnit test result report' post build action and fill in 'Test report XMLs' with 
+5 Add a 'Publish JUnit test result report' post build action and fill in 'Test report XMLs' with 
 e2e/testResults/*.xml
 
-6. Optionally add a 'Run Sauce Labs Test Publisher' post build action.
+6 Optionally add a 'Run Sauce Labs Test Publisher' post build action.
