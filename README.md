@@ -1,6 +1,6 @@
-End to end testing of Servoy solutions example running on saucelabs.
+## End to end testing of Servoy solutions example running on Sauce Labs.
 
-Prerequisites 
+### Prerequisites 
 
 1 'Jenkins' https://jenkins-ci.org/
   - git plugin https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin
@@ -14,6 +14,8 @@ Prerequisites
 4 'ant-contrib' simply copy ant-contrib*.jar to the $ANT_HOME/lib/ folder - http://ant-contrib.sourceforge.net/#install
 
 5 'Servoy 8' full install, will be used to export solutions to war files
+
+### Description
 
 The entry point is e2e_test_runner.xml. It takes a servoy solution project (the 'hello' folder), exports it as a war file ('e2e/war_export/hello.war'), starts a tomcat server instance (the 'apache-tomcat-8.0.24' folder),  deploys the war, runs the protractor test scripts e2e/spec/hello/*_spec.js, undeploys the war file and shuts down tomcat.
 
@@ -30,7 +32,7 @@ Tests should then be added in the folder e2e/spec/mySolution/ and should end wit
 
 Protractor test scripts can be generated using Selenium IDE http://www.seleniumhq.org/projects/ide/. 
 
-Setup
+### Setup
 
 1 Create a Freestyle jenkins job.
 
@@ -47,7 +49,7 @@ Setup
 				sauceUserPlaceholder=sauceLabsUserName
 				sauceKeyPlaceholder=sauceLabsAceessKey
 ```
-Note: The values for the and properties are provided as an example, they should be customised to match your instalation and Sauce Labs account.
+Note: The values for the ant properties are provided as an example, they should be customised to match your instalation and Sauce Labs account.
 
 5 Add a 'Publish JUnit test result report' post build action and fill in 'Test report XMLs' with 
 e2e/testResults/*.xml
