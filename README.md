@@ -31,16 +31,25 @@ Tests should then be added in the folder e2e/spec/mySolution/ and should end wit
 Protractor test scripts can be generated using Selenium IDE http://www.seleniumhq.org/projects/ide/. 
 
 Setup
-1. Create a Freestyle jenkins job.
-2. Add this git repository URL:... Branch Specifier:*/master
-3. Enable Sauce labs support and Sauce Connect. Override default authentication with your Sauce labs account credentials. 
-4. Add an 'Invoke Ant' build step. And fill in as follows
-	Targets: 	run_war_solution_tests
-	Build File: e2e_test_runner.xml
-	Properties: jdk1.8_home = /usr/lib/jvm/java-8-oracle
+
+1 Create a Freestyle jenkins job.
+
+2 Add this git repository URL:... Branch Specifier:*/master
+
+3 Enable Sauce labs support and Sauce Connect. Override default authentication with your Sauce labs account credentials. 
+
+4 Add an 'Invoke Ant' build step. And fill in as follows
+```
+  - Targets: 	run_war_solution_tests
+  - Build File: e2e_test_runner.xml
+  - Properties: jdk1.8_home = /usr/lib/jvm/java-8-oracle
 				servoy_install = /usr/local/servoy
 				sauceUserPlaceholder=sauceLabsUserName
 				sauceKeyPlaceholder=sauceLabsAceessKey
+```
 Note: The values for the and properties are provided as an example, they should be customised to match your instalation and Sauce Labs account.
-5. Add a 'Publish JUnit test result report' post build action and fill in 'Test report XMLs' with e2e/testResults/*.xml
+
+5. Add a 'Publish JUnit test result report' post build action and fill in 'Test report XMLs' with 
+e2e/testResults/*.xml
+
 6. Optionally add a 'Run Sauce Labs Test Publisher' post build action.
