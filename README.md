@@ -38,7 +38,10 @@ Protractor test scripts can be generated using Selenium IDE http://www.seleniumh
 
 2 Add this git repository URL:... Branch Specifier:*/master
 
-3 Enable Sauce labs support and Sauce Connect. Override default authentication with your Sauce labs account credentials. 
+3 Enable Sauce labs support and Sauce Connect. Override default authentication with your Sauce labs account credentials. Under 'Sauce Connect Advanced Options' click the 'Advanced' button and fill in 
+```
+Sauce Connect Options: --vm-version dev-varnish
+```
 
 4 Add an 'Invoke Ant' build step. And fill in as follows
 ```
