@@ -28,15 +28,15 @@ solutions_to_export_as_war_tests			= hello \
 mySolution
 ```
 
-Tests should then be added in the folder e2e/spec/mySolution/ and should end with '_spec.js'.
+Tests should then be added in the folder e2e/spec/mySolution/ and should end with '_spec.js'.*
 
-Protractor test scripts can be generated using Selenium IDE http://www.seleniumhq.org/projects/ide/. 
+
 
 ### Setup
 
 1 Create a Freestyle jenkins job.
 
-2 Add this git repository URL:... Branch Specifier:*/master
+2 Add this git repository URL:https://github.com/Servoy/servoy_e2e_test_example.git Branch Specifier:*/master
 
 3 Enable Sauce labs support and Sauce Connect. Override default authentication with your Sauce labs account credentials. Under 'Sauce Connect Advanced Options' click the 'Advanced' button and fill in 
 ```
@@ -58,3 +58,5 @@ Note: The values for the ant properties are provided as an example, they should 
 e2e/testResults/*.xml
 
 6 Optionally add a 'Run Sauce Labs Test Publisher' post build action.
+
+*This configuration can be changed in e2e/servoyConfigurator.js. To changed other protractor (http://www.protractortest.org/#/) settings see file e2e/protractor.config.js.template. It is currently a template because before each run the ant script injects the protractor configuration.
