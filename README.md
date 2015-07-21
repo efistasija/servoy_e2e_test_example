@@ -59,4 +59,4 @@ e2e/testResults/*.xml
 
 6 Optionally add a 'Run Sauce Labs Test Publisher' post build action.
 
-*This configuration can be changed in e2e/servoyConfigurator.js. To changed other protractor (http://www.protractortest.org/#/) settings see file e2e/protractor.config.js.template. It is currently a template because before each run the ant script injects the protractor configuration.
+*This configuration can be changed in e2e/servoyConfigurator.js. To changed other protractor (http://www.protractortest.org/#/) settings see file e2e/protractor.config.js.template. It is currently a template because before each run the ant script injects the sauce labs credentials specified as ant properties.
